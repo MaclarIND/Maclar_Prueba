@@ -200,10 +200,14 @@ button { font: inherit; }
 }
 .hero__info {
   position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  max-width: 320px; z-index: 5;
+  max-width: 320px; z-index: 20;
   opacity: 0; transform: translateY(-50%) translateX(-16px);
   transition: opacity var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
   pointer-events: none;
+  background: linear-gradient(115deg, rgba(8,11,15,0.9) 0%, rgba(8,11,15,0.88) 78%, rgba(8,11,15,0) 100%);
+  padding: 28px 40px 28px 22px;
+  border-radius: 18px;
+  margin-left: -22px;
 }
 .hero__info[data-active="true"] { opacity: 1; transform: translateY(-50%) translateX(0); pointer-events: auto; }
 .hero__info-bar { width: 46px; height: 3px; background: var(--accent-orange); border-radius: 3px; margin-bottom: 14px; }
@@ -223,8 +227,7 @@ button { font: inherit; }
   filter: drop-shadow(0 18px 26px rgba(0,0,0,0.45));
 }
 .hero__item img {
-  height: var(--h, 220px); width: auto; object-fit: contain;
-  transition: height var(--dur-slow) var(--ease-out);
+  height: 228px; max-width: 210px; width: auto; object-fit: contain;
   pointer-events: none;
 }
 .hero__item-label {
@@ -270,13 +273,13 @@ button { font: inherit; }
 
 @media (max-width: 760px) {
   .hero { min-height: 100vh; }
-  .hero__info, .hero__info[data-active="true"] { position: static; transform: none; max-width: none; opacity: 1; pointer-events: auto; text-align: center; margin: 0 auto 8px; padding: 0 6px; }
+  .hero__info, .hero__info[data-active="true"] { position: static; transform: none; max-width: none; opacity: 1; pointer-events: auto; text-align: center; margin: 0 auto 8px; padding: 0 6px; background: none; border-radius: 0; }
   .hero__info-bar { margin: 0 auto 12px; }
   .hero__dots { display: none; }
   .hero__stage { display: block; min-height: 0; margin-top: 6px; }
   .hero__track { height: 210px; }
   .hero__item { bottom: 0; }
-  .hero__item img { height: var(--h-mobile, 150px); }
+  .hero__item img { height: 158px; max-width: 150px; }
 }
 
 /* ---------- Categorías franja ---------- */

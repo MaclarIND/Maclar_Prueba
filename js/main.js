@@ -139,11 +139,6 @@
         el.setAttribute("data-active", String(i === active));
         el.setAttribute("aria-current", i === active ? "true" : "false");
         el.tabIndex = abs <= 2 ? 0 : -1;
-        const product = items[i];
-        const isBotonera = product.id.startsWith("botonera");
-        const baseH = isBotonera ? 190 : 250;
-        el.style.setProperty("--h", baseH + "px");
-        el.style.setProperty("--h-mobile", (isBotonera ? 130 : 168) + "px");
       });
     }
 
