@@ -46,7 +46,13 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { overflow-x: hidden; }
+/* Evita que imágenes u otro contenido con tamaño intrínseco grande
+   fuercen el ancho de columnas grid/flex más allá del viewport. */
+.product-hero-grid > *, .contact-grid > *, .contact-info-item > *,
+.company-grid > *, .anatomy-grid > *, .footer-grid > *, .form-row > *,
+.cat-strip__grid > *, .hero__top > * { min-width: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
