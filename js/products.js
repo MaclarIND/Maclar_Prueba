@@ -66,19 +66,21 @@ const MACLAR_PRODUCTS = [
       "Características observadas directamente sobre las fotografías del equipo. No se listan corrientes, tensiones ni modelos exactos por no estar confirmados.",
     images: [
       { file: "frontal.jpg", alt: "Tablero de maniobra electromecánica MACLAR, vista frontal con la puerta abierta", caption: "Vista frontal" },
+      { file: "3-4-izquierda.jpg", alt: "Tablero de maniobra electromecánica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
       { file: "ambiente.jpg", alt: "Tablero de maniobra electromecánica MACLAR, toma general", caption: "Vista general" },
       { file: "detalle-controlador.jpg", alt: "Detalle de la placa controladora electrónica", caption: "Detalle: controladora" },
       { file: "detalle-contactores.jpg", alt: "Detalle de los contactores de potencia y protecciones", caption: "Detalle: contactores y protecciones" },
       { file: "detalle-bornera.jpg", alt: "Detalle de la bornera de conexión lateral", caption: "Detalle: bornera" },
-      { file: "detalle-transformador.jpg", alt: "Detalle del transformador de control", caption: "Detalle: transformador" }
+      { file: "detalle-transformador.jpg", alt: "Detalle del transformador de control", caption: "Detalle: transformador" },
+      { file: "detalle-acabado.jpg", alt: "Detalle del acabado y la esquina del gabinete", caption: "Detalle: acabado del gabinete" }
     ],
     anatomy: [
-      { x: 44, y: 22, title: "Controladora electrónica", text: "Placa con relés de salida, borneras de campo y visualizador de dos dígitos." },
-      { x: 34, y: 42, title: "Módulos auxiliares", text: "Placas secundarias asociadas a funciones de maniobra." },
-      { x: 30, y: 60, title: "Contactores de potencia", text: "Tres contactores montados sobre riel DIN." },
-      { x: 58, y: 60, title: "Protecciones", text: "Interruptores termomagnéticos de línea." },
-      { x: 84, y: 50, title: "Bornera de conexión", text: "Bloque de bornes identificados por función, sobre el lateral derecho." },
-      { x: 70, y: 88, title: "Transformador de control", text: "Provee las tensiones auxiliares del tablero." }
+      { x: 64, y: 22, title: "Controladora electrónica", text: "Placa con relés de salida, borneras de campo y visualizador de dos dígitos." },
+      { x: 43, y: 48, title: "Módulos auxiliares", text: "Placas secundarias asociadas a funciones de maniobra." },
+      { x: 35, y: 64, title: "Contactores de potencia", text: "Tres contactores montados sobre riel DIN." },
+      { x: 61, y: 64, title: "Protecciones", text: "Interruptores termomagnéticos de línea." },
+      { x: 77, y: 53, title: "Bornera de conexión", text: "Bloque de bornes identificados por función, sobre el lateral derecho." },
+      { x: 70, y: 87, title: "Transformador de control", text: "Provee las tensiones auxiliares del tablero." }
     ],
     docs: []
   },
@@ -105,17 +107,20 @@ const MACLAR_PRODUCTS = [
       "Características observadas directamente sobre las fotografías del equipo. La marca y el modelo del variador provienen de su propio rótulo, visible en la imagen.",
     images: [
       { file: "frontal.jpg", alt: "Tablero de maniobra electrónica MACLAR con variador de frecuencia, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.jpg", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
+      { file: "3-4-derecha.jpg", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
       { file: "detalle-variador.jpg", alt: "Detalle del variador de frecuencia Yaskawa GA500", caption: "Detalle: variador de frecuencia" },
       { file: "detalle-controlador.jpg", alt: "Detalle de la placa controladora electrónica", caption: "Detalle: controladora" },
       { file: "detalle-contactores.jpg", alt: "Detalle de contactores y protecciones", caption: "Detalle: contactores y protecciones" },
-      { file: "detalle-transformador.jpg", alt: "Detalle del transformador de control", caption: "Detalle: transformador" }
+      { file: "detalle-transformador.jpg", alt: "Detalle del transformador de control", caption: "Detalle: transformador" },
+      { file: "detalle-acabado.jpg", alt: "Detalle del acabado y la esquina del gabinete", caption: "Detalle: acabado del gabinete" }
     ],
     anatomy: [
-      { x: 20, y: 22, title: "Variador de frecuencia", text: "Yaskawa GA500, controla arranque y velocidad del motor de tracción." },
-      { x: 62, y: 18, title: "Controladora electrónica", text: "Placa con relés de salida, borneras de campo y visualizador." },
-      { x: 30, y: 62, title: "Contactores y protecciones", text: "Sobre riel DIN, en la sección inferior del gabinete." },
-      { x: 84, y: 48, title: "Bornera de conexión", text: "Bloque de bornes identificados por función." },
-      { x: 68, y: 88, title: "Transformador de control", text: "Provee las tensiones auxiliares del tablero." }
+      { x: 32, y: 24, title: "Variador de frecuencia", text: "Yaskawa GA500, controla arranque y velocidad del motor de tracción." },
+      { x: 65, y: 23, title: "Controladora electrónica", text: "Placa con relés de salida, borneras de campo y visualizador." },
+      { x: 37, y: 69, title: "Contactores y protecciones", text: "Sobre riel DIN, en la sección inferior del gabinete." },
+      { x: 77, y: 56, title: "Bornera de conexión", text: "Bloque de bornes identificados por función." },
+      { x: 23, y: 53, title: "Transformador de control", text: "Provee las tensiones auxiliares del tablero." }
     ],
     docs: []
   },
@@ -141,15 +146,17 @@ const MACLAR_PRODUCTS = [
       "Características observadas directamente sobre la fotografía provista del producto.",
     images: [
       { file: "frontal.jpg", alt: "Botonera con ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.jpg", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
+      { file: "3-4-derecha.jpg", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
       { file: "detalle-pulsador.jpg", alt: "Detalle del conjunto de pulsador y testigos luminosos", caption: "Detalle: pulsador y testigos" },
       { file: "detalle-acabado.jpg", alt: "Detalle del acabado cepillado y la fijación superior", caption: "Detalle: acabado y fijación" }
     ],
     anatomy: [
-      { x: 50, y: 8, title: "Tornillo de fijación superior", text: "Fijación visible de la placa al vano." },
-      { x: 50, y: 33, title: "Ventana", text: "Abertura rectangular en el tercio superior de la placa." },
-      { x: 42, y: 74, title: "Pulsador", text: "Conjunto de pulsador de micromovimiento." },
-      { x: 60, y: 74, title: "Testigos luminosos", text: "Doble indicador rojo junto al pulsador." },
-      { x: 50, y: 94, title: "Tornillo de fijación inferior", text: "Segunda fijación visible de la placa." }
+      { x: 59, y: 9, title: "Tornillo de fijación superior", text: "Fijación visible de la placa al vano." },
+      { x: 60, y: 29, title: "Ventana", text: "Abertura rectangular en el tercio superior de la placa." },
+      { x: 54, y: 73, title: "Pulsador", text: "Conjunto de pulsador de micromovimiento." },
+      { x: 67, y: 73, title: "Testigos luminosos", text: "Doble indicador rojo junto al pulsador." },
+      { x: 59, y: 90, title: "Tornillo de fijación inferior", text: "Segunda fijación visible de la placa." }
     ],
     docs: []
   },
@@ -174,14 +181,15 @@ const MACLAR_PRODUCTS = [
       "Características observadas directamente sobre la fotografía provista del producto.",
     images: [
       { file: "frontal.jpg", alt: "Botonera de un pulsador sin ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.jpg", alt: "Botonera de un pulsador sin ventana superior MACLAR, perspectiva de tres cuartos", caption: "Perspectiva tres cuartos" },
       { file: "detalle-pulsador.jpg", alt: "Detalle del conjunto de pulsador y testigos luminosos", caption: "Detalle: pulsador y testigos" },
       { file: "detalle-acabado.jpg", alt: "Detalle del acabado cepillado y la fijación inferior", caption: "Detalle: acabado y fijación" }
     ],
     anatomy: [
-      { x: 50, y: 10, title: "Tornillo de fijación superior", text: "Fijación visible de la placa al vano." },
-      { x: 42, y: 46, title: "Pulsador", text: "Conjunto de pulsador de micromovimiento, ubicado en el centro." },
-      { x: 60, y: 46, title: "Testigos luminosos", text: "Doble indicador rojo junto al pulsador." },
-      { x: 50, y: 88, title: "Tornillo de fijación inferior", text: "Segunda fijación visible de la placa." }
+      { x: 44, y: 12, title: "Tornillo de fijación superior", text: "Fijación visible de la placa al vano." },
+      { x: 54, y: 44, title: "Pulsador", text: "Conjunto de pulsador de micromovimiento, ubicado en el centro." },
+      { x: 30, y: 50, title: "Testigos luminosos", text: "Doble indicador rojo junto al pulsador." },
+      { x: 43, y: 77, title: "Tornillo de fijación inferior", text: "Segunda fijación visible de la placa." }
     ],
     docs: []
   }
