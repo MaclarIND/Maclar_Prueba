@@ -121,8 +121,8 @@ button { font: inherit; }
   padding: 14px 24px; max-width: var(--container); margin: 0 auto;
 }
 .brand { display: flex; align-items: center; text-decoration: none; color: var(--ink); }
-.brand__logo { height: 34px; width: auto; display: block; }
-.footer-grid .brand__logo { height: 30px; }
+.brand__logo { height: 48px; width: auto; display: block; }
+.footer-grid .brand__logo { height: 42px; }
 
 .nav-desktop { display: flex; align-items: center; gap: 30px; }
 .nav-desktop a {
