@@ -65,9 +65,9 @@ const MACLAR_PRODUCTS = [
     specsNote:
       "Características observadas directamente sobre las fotografías del equipo. No se listan corrientes, tensiones ni modelos exactos por no estar confirmados.",
     images: [
-      { file: "frontal.jpg", alt: "Tablero de maniobra electromecánica MACLAR, vista frontal con la puerta abierta", caption: "Vista frontal" },
-      { file: "3-4-izquierda.jpg", alt: "Tablero de maniobra electromecánica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
-      { file: "ambiente.jpg", alt: "Tablero de maniobra electromecánica MACLAR, toma general", caption: "Vista general" },
+      { file: "frontal.png", alt: "Tablero de maniobra electromecánica MACLAR, vista frontal con la puerta abierta", caption: "Vista frontal" },
+      { file: "3-4-izquierda.png", alt: "Tablero de maniobra electromecánica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
+      { file: "ambiente.png", alt: "Tablero de maniobra electromecánica MACLAR, toma general", caption: "Vista general" },
       { file: "detalle-controlador.jpg", alt: "Detalle de la placa controladora electrónica", caption: "Detalle: controladora" },
       { file: "detalle-contactores.jpg", alt: "Detalle de los contactores de potencia y protecciones", caption: "Detalle: contactores y protecciones" },
       { file: "detalle-bornera.jpg", alt: "Detalle de la bornera de conexión lateral", caption: "Detalle: bornera" },
@@ -106,9 +106,9 @@ const MACLAR_PRODUCTS = [
     specsNote:
       "Características observadas directamente sobre las fotografías del equipo. La marca y el modelo del variador provienen de su propio rótulo, visible en la imagen.",
     images: [
-      { file: "frontal.jpg", alt: "Tablero de maniobra electrónica MACLAR con variador de frecuencia, vista frontal", caption: "Vista frontal" },
-      { file: "3-4-izquierda.jpg", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
-      { file: "3-4-derecha.jpg", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
+      { file: "frontal.png", alt: "Tablero de maniobra electrónica MACLAR con variador de frecuencia, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.png", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
+      { file: "3-4-derecha.png", alt: "Tablero de maniobra electrónica MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
       { file: "detalle-variador.jpg", alt: "Detalle del variador de frecuencia Yaskawa GA500", caption: "Detalle: variador de frecuencia" },
       { file: "detalle-controlador.jpg", alt: "Detalle de la placa controladora electrónica", caption: "Detalle: controladora" },
       { file: "detalle-contactores.jpg", alt: "Detalle de contactores y protecciones", caption: "Detalle: contactores y protecciones" },
@@ -145,9 +145,9 @@ const MACLAR_PRODUCTS = [
     specsNote:
       "Características observadas directamente sobre la fotografía provista del producto.",
     images: [
-      { file: "frontal.jpg", alt: "Botonera con ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
-      { file: "3-4-izquierda.jpg", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
-      { file: "3-4-derecha.jpg", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
+      { file: "frontal.png", alt: "Botonera con ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.png", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos izquierda", caption: "Perspectiva tres cuartos izquierda" },
+      { file: "3-4-derecha.png", alt: "Botonera con ventana superior MACLAR, perspectiva de tres cuartos derecha", caption: "Perspectiva tres cuartos derecha" },
       { file: "detalle-pulsador.jpg", alt: "Detalle del conjunto de pulsador y testigos luminosos", caption: "Detalle: pulsador y testigos" },
       { file: "detalle-acabado.jpg", alt: "Detalle del acabado cepillado y la fijación superior", caption: "Detalle: acabado y fijación" }
     ],
@@ -180,8 +180,8 @@ const MACLAR_PRODUCTS = [
     specsNote:
       "Características observadas directamente sobre la fotografía provista del producto.",
     images: [
-      { file: "frontal.jpg", alt: "Botonera de un pulsador sin ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
-      { file: "3-4-izquierda.jpg", alt: "Botonera de un pulsador sin ventana superior MACLAR, perspectiva de tres cuartos", caption: "Perspectiva tres cuartos" },
+      { file: "frontal.png", alt: "Botonera de un pulsador sin ventana superior MACLAR, vista frontal", caption: "Vista frontal" },
+      { file: "3-4-izquierda.png", alt: "Botonera de un pulsador sin ventana superior MACLAR, perspectiva de tres cuartos", caption: "Perspectiva tres cuartos" },
       { file: "detalle-pulsador.jpg", alt: "Detalle del conjunto de pulsador y testigos luminosos", caption: "Detalle: pulsador y testigos" },
       { file: "detalle-acabado.jpg", alt: "Detalle del acabado cepillado y la fijación inferior", caption: "Detalle: acabado y fijación" }
     ],
@@ -214,7 +214,7 @@ function maclarHeroImagePath(product) {
   return `${maclarRoot()}assets/img/hero/${product.id}.png`;
 }
 function maclarCardImagePath(product) {
-  return `${maclarRoot()}assets/img/products/${product.id}/card.jpg`;
+  return `${maclarRoot()}assets/img/products/${product.id}/card.png`;
 }
 function maclarProductUrl(product) {
   return `${maclarRoot()}productos/${product.slug}.html`;

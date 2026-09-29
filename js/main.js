@@ -437,7 +437,7 @@
         <div class="anatomy-grid">
           <div class="anatomy-figure">
             <div class="anatomy-figure__frame">
-              <img src="${maclarImagePath(product, "frontal.jpg")}" alt="${product.images[0].alt}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async">
+              <img src="${maclarImagePath(product, "frontal.png")}" alt="${product.images[0].alt}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async">
             </div>
             ${pointsHtml}
           </div>
@@ -526,7 +526,7 @@
           </button>`
         )
         .join("");
-      anatomyPanel.querySelector("[data-anatomy-figure-img]").src = maclarImagePath(product, "frontal.jpg");
+      anatomyPanel.querySelector("[data-anatomy-figure-img]").src = maclarImagePath(product, "frontal.png");
       anatomyPanel.querySelector("[data-anatomy-figure-img]").alt = product.images[0].alt;
       anatomyPanel.querySelector("[data-anatomy-points]").innerHTML = pointsHtml;
       anatomyPanel.querySelector("[data-anatomy-list]").innerHTML = listHtml;
