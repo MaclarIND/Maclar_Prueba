@@ -163,7 +163,7 @@
             <p>${product.tagline}</p>
             <div class="hero__ctas">
               <a class="btn btn-primary btn-sm" href="${maclarProductUrl(product)}">Ver ficha</a>
-              <a class="btn btn-light btn-sm" href="${maclarRoot()}index.html?producto=${product.slug}#contacto">Consultar</a>
+              <a class="btn btn-light btn-sm" href="${maclarRoot()}index.html?producto=${product.slug}#contacto">Cotizar</a>
             </div>`;
           info.setAttribute("data-active", "true");
         }, prefersReducedMotion ? 0 : 120);
@@ -247,7 +247,7 @@
             <span class="product-category-tag">${cat.name}</span>
             <h3>${cat.name}</h3>
             <p>${cat.tagline} Sin fotografías verificadas propias por el momento: te compartimos la información documentada por el fabricante.</p>
-            <a class="btn btn-ghost btn-sm" href="index.html?producto=&categoria=${cat.slug}#contacto">Consultar sobre esta línea</a>`;
+            <a class="btn btn-ghost btn-sm" href="index.html?producto=&categoria=${cat.slug}#contacto">Solicitar cotización</a>`;
           grid.appendChild(card);
           return;
         }
