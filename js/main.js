@@ -501,6 +501,10 @@
       thumbBtn.appendChild(thumbImg);
       thumbWrap.appendChild(thumbBtn);
     });
+    // Gallery DOM (images/thumbs) is built dynamically above, after
+    // initProductGallery() already ran on page load — wire it up now
+    // that the elements it needs actually exist.
+    initProductGallery();
 
     const specsTable = root.querySelector("[data-p-specs]");
     product.specsVerified.forEach((s) => {
