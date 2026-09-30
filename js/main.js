@@ -461,6 +461,7 @@
     const frame = root.querySelector("[data-3d-frame]");
     const viewer = root.querySelector("[data-model-viewer]");
     if (!photosTab || !threeDTab || !photosView || !threeDView || !frame || !viewer) return;
+    if (typeof customElements === "undefined" || !customElements.get) return;
 
     function showView(name) {
       photosView.hidden = name !== "photos";
@@ -469,21 +470,37 @@
       threeDTab.setAttribute("aria-pressed", String(name === "3d"));
     }
     photosTab.addEventListener("click", () => showView("photos"));
-    threeDTab.addEventListener("click", () => showView("3d"));
 
-    // La pestaña 3D arranca oculta (hidden en el HTML) y solo se revela si
-    // el modelo carga con éxito. Si el navegador no soporta <model-viewer>
-    // o el GLB falla, el usuario simplemente sigue viendo las fotos reales.
+    const src = maclarModel3dPath(product);
+    viewer.setAttribute("alt", `Vista 3D aproximada — ${product.name}`);
+
+    // <model-viewer> no arranca a cargar el modelo mientras su contenedor
+    // está oculto (display:none no le da layout), así que no podemos
+    // esperar su propio evento "load" para decidir si mostrar la pestaña.
+    // Primero confirmamos con un fetch liviano que el .glb existe; recién
+    // ahí revelamos la pestaña, y el <model-viewer> recibe su src cuando
+    // el usuario efectivamente la abre (momento en que ya es visible).
+    let modelRequested = false;
+    threeDTab.addEventListener("click", () => {
+      showView("3d");
+      if (!modelRequested) {
+        modelRequested = true;
+        viewer.setAttribute("src", src);
+      }
+    });
     viewer.addEventListener("load", () => {
       frame.setAttribute("data-loading", "false");
-      threeDTab.hidden = false;
     });
     viewer.addEventListener("error", () => {
       threeDTab.hidden = true;
       if (threeDTab.getAttribute("aria-pressed") === "true") showView("photos");
     });
-    viewer.setAttribute("alt", `Vista 3D aproximada — ${product.name}`);
-    viewer.setAttribute("src", maclarModel3dPath(product));
+
+    fetch(src, { method: "HEAD" })
+      .then((res) => {
+        if (res.ok) threeDTab.hidden = false;
+      })
+      .catch(() => {});
   }
 
   /* ---------------- Página de producto individual ---------------- */
