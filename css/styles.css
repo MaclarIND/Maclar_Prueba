@@ -292,6 +292,39 @@ button { font: inherit; }
   .hero__item img { height: 158px; max-width: 150px; }
 }
 
+/* ---------- Secuencia cinematográfica ---------- */
+.cinematic {
+  position: relative; height: min(78vh, 640px); min-height: 380px;
+  overflow: hidden; background: var(--steel-950);
+}
+.cinematic__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.cinematic__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(16,22,29,0.86) 0%, rgba(16,22,29,0.25) 46%, rgba(16,22,29,0.55) 100%);
+}
+.cinematic__overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 0 44px; color: #fff;
+}
+.cinematic__overlay .container { width: 100%; }
+.cinematic__eyebrow {
+  font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent-blue-soft); margin-bottom: 12px;
+}
+.cinematic__caption {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.6rem);
+  line-height: 1.12; max-width: 20ch; margin-bottom: 16px;
+}
+.cinematic__note {
+  font-size: 0.78rem; color: rgba(255,255,255,0.62); max-width: 46ch; line-height: 1.5;
+}
+@media (max-width: 640px) {
+  .cinematic { height: min(64vh, 520px); }
+  .cinematic__overlay { padding-bottom: 28px; }
+}
 /* ---------- Categorías franja ---------- */
 .cat-strip { padding: 40px 0; border-bottom: 1px solid var(--line); }
 .cat-strip__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }

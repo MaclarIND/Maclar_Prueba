@@ -4,6 +4,18 @@
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------------- Video cinematográfico ---------------- */
+  const cinematicVideo = document.querySelector("[data-cinematic-video]");
+  if (cinematicVideo) {
+    if (prefersReducedMotion) {
+      cinematicVideo.removeAttribute("autoplay");
+      cinematicVideo.pause();
+    }
+    cinematicVideo.addEventListener("error", () => {
+      cinematicVideo.closest(".cinematic")?.classList.add("cinematic--no-video");
+    });
+  }
+
   /* ---------------- Header / menú móvil ---------------- */
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const mobileNav = document.querySelector("[data-mobile-nav]");
