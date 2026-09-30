@@ -473,6 +473,24 @@ button { font: inherit; }
 .product-hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 52px; }
 @media (max-width: 940px) { .product-hero-grid { grid-template-columns: 1fr; gap: 30px; } }
 
+.gallery__tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.gallery__tab {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 9px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  transition: border-color var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+}
+.gallery__tab:hover { color: var(--ink); border-color: var(--steel-300); }
+.gallery__tab[aria-pressed="true"] { background: var(--steel-950); border-color: var(--steel-950); color: #fff; }
+.gallery__tab-badge {
+  font-size: 0.62rem; letter-spacing: 0.03em; padding: 1px 6px; border-radius: var(--radius-sm);
+  background: var(--accent-blue-soft); color: var(--accent-blue-darker); font-weight: 700;
+}
+.gallery__tab[aria-pressed="true"] .gallery__tab-badge { background: var(--accent-blue); color: #fff; }
+.gallery__tab[hidden] { display: none; }
+
+.gallery__view[hidden] { display: none; }
+
 .gallery__main {
   border-radius: var(--radius-lg); overflow: hidden; background: var(--steel-100);
   aspect-ratio: 4 / 5; position: relative; box-shadow: var(--shadow-md); padding: 32px;
@@ -491,6 +509,20 @@ button { font: inherit; }
 .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .gallery__thumb[aria-current="true"] { border-color: var(--accent-blue); }
 .gallery__caption { font-size: 0.8rem; color: var(--ink-soft); margin-top: 10px; min-height: 1.2em; }
+
+.gallery__3d-frame {
+  border-radius: var(--radius-lg); overflow: hidden; background: var(--steel-100);
+  aspect-ratio: 4 / 5; position: relative; box-shadow: var(--shadow-md);
+}
+.gallery__3d-frame model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+.gallery__3d-frame[data-loading="true"]::after {
+  content: "Generando vista 3D…"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); background: var(--steel-100);
+}
+.gallery__3d-note {
+  font-size: 0.76rem; color: var(--steel-500); margin-top: 14px; line-height: 1.5;
+  padding: 10px 12px; border: 1px dashed var(--line); border-radius: var(--radius-sm);
+}
 
 .product-category-tag {
   display: inline-block; background: var(--steel-100); color: var(--steel-700);

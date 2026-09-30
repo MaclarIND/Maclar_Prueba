@@ -216,6 +216,9 @@ function maclarHeroImagePath(product) {
 function maclarCardImagePath(product) {
   return `${maclarRoot()}assets/img/products/${product.id}/card.png`;
 }
+function maclarModel3dPath(product) {
+  return `${maclarRoot()}assets/3d/${product.id}.glb`;
+}
 function maclarProductUrl(product) {
   return `${maclarRoot()}productos/${product.slug}.html`;
 }

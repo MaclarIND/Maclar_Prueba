@@ -452,6 +452,40 @@
     });
   }
 
+  /* ---------------- Visor 3D del producto ---------------- */
+  function initProduct3DViewer(root, product) {
+    const photosTab = root.querySelector('[data-gallery-tab="photos"]');
+    const threeDTab = root.querySelector("[data-3d-tab]");
+    const photosView = root.querySelector('[data-gallery-view="photos"]');
+    const threeDView = root.querySelector('[data-gallery-view="3d"]');
+    const frame = root.querySelector("[data-3d-frame]");
+    const viewer = root.querySelector("[data-model-viewer]");
+    if (!photosTab || !threeDTab || !photosView || !threeDView || !frame || !viewer) return;
+
+    function showView(name) {
+      photosView.hidden = name !== "photos";
+      threeDView.hidden = name !== "3d";
+      photosTab.setAttribute("aria-pressed", String(name === "photos"));
+      threeDTab.setAttribute("aria-pressed", String(name === "3d"));
+    }
+    photosTab.addEventListener("click", () => showView("photos"));
+    threeDTab.addEventListener("click", () => showView("3d"));
+
+    // La pestaña 3D arranca oculta (hidden en el HTML) y solo se revela si
+    // el modelo carga con éxito. Si el navegador no soporta <model-viewer>
+    // o el GLB falla, el usuario simplemente sigue viendo las fotos reales.
+    viewer.addEventListener("load", () => {
+      frame.setAttribute("data-loading", "false");
+      threeDTab.hidden = false;
+    });
+    viewer.addEventListener("error", () => {
+      threeDTab.hidden = true;
+      if (threeDTab.getAttribute("aria-pressed") === "true") showView("photos");
+    });
+    viewer.setAttribute("alt", `Vista 3D aproximada — ${product.name}`);
+    viewer.setAttribute("src", maclarModel3dPath(product));
+  }
+
   /* ---------------- Página de producto individual ---------------- */
   function initProductPage() {
     const root = document.querySelector("[data-product-page]");
@@ -505,6 +539,7 @@
     // initProductGallery() already ran on page load — wire it up now
     // that the elements it needs actually exist.
     initProductGallery();
+    initProduct3DViewer(root, product);
 
     const specsTable = root.querySelector("[data-p-specs]");
     product.specsVerified.forEach((s) => {

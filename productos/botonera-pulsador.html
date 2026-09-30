@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo:wght@600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/styles.css">
 <script>window.MACLAR_ROOT = "../";</script>
+<script type="module" src="../assets/vendor/model-viewer.min.js"></script>
 </head>
 <body data-product-page="botonera-pulsador">
 <a class="skip-link" href="#contenido">Saltear al contenido</a>
@@ -48,9 +49,21 @@
   <section class="product-hero">
     <div class="container product-hero-grid">
       <div data-gallery>
-        <div class="gallery__main" data-gallery-main></div>
-        <p class="gallery__caption" data-gallery-caption></p>
-        <div class="gallery__thumbs" data-gallery-thumbs></div>
+        <div class="gallery__tabs" role="tablist">
+          <button type="button" class="gallery__tab" data-gallery-tab="photos" role="tab" aria-pressed="true">Fotos</button>
+          <button type="button" class="gallery__tab" data-gallery-tab="3d" role="tab" aria-pressed="false" hidden data-3d-tab>Vista 3D <span class="gallery__tab-badge">Beta</span></button>
+        </div>
+        <div class="gallery__view" data-gallery-view="photos">
+          <div class="gallery__main" data-gallery-main></div>
+          <p class="gallery__caption" data-gallery-caption></p>
+          <div class="gallery__thumbs" data-gallery-thumbs></div>
+        </div>
+        <div class="gallery__view" data-gallery-view="3d" hidden>
+          <div class="gallery__3d-frame" data-3d-frame data-loading="true">
+            <model-viewer data-model-viewer camera-controls touch-action="pan-y" auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="0.95" interaction-prompt="none"></model-viewer>
+          </div>
+          <p class="gallery__3d-note">Vista 3D aproximada, generada con inteligencia artificial a partir de las fotografías reales del producto. Puede diferir en detalles respecto de la unidad física — no reemplaza a las fotos ni a una consulta técnica directa.</p>
+        </div>
       </div>
       <div>
         <span class="product-category-tag" data-p-category></span>
