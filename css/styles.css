@@ -482,6 +482,7 @@ button { font: inherit; }
 .form-status[data-show="true"] { display: block; }
 .form-status--ok { background: #eef7ee; color: #2b6b32; border: 1px solid #cfe8cf; }
 .form-status--err { background: #fdeeee; color: #9b2c2c; border: 1px solid #f3c9c9; }
+.form-status:not(.form-status--ok):not(.form-status--err)[data-show="true"] { background: var(--steel-100); color: var(--ink-soft); border: 1px solid var(--steel-200); }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--steel-950); color: rgba(255,255,255,0.7); padding: 56px 0 28px; }

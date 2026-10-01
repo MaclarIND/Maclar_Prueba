@@ -344,6 +344,14 @@
       }
     }
 
+    // Envío automático por email: usa FormSubmit (https://formsubmit.co), un
+    // servicio que reenvía por correo lo que se le postea por AJAX, sin
+    // necesidad de backend propio. IMPORTANTE: la primera vez que llegue una
+    // consulta, FormSubmit manda un correo de activación a la casilla de
+    // destino pidiendo confirmar el buzón — hasta que no se confirme ese
+    // enlace, los envíos no llegan.
+    const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/natywolf@mac.com";
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const data = new FormData(form);
@@ -359,25 +367,48 @@
         return;
       }
 
-      const subject = encodeURIComponent("Consulta desde maclar.com.ar — " + nombre);
-      const bodyLines = [
-        `Nombre: ${nombre}`,
-        `Empresa: ${data.get("empresa") || "-"}`,
-        `Correo: ${correo}`,
-        `Teléfono: ${data.get("telefono") || "-"}`,
-        `Producto de interés: ${select ? select.options[select.selectedIndex].text : "-"}`,
-        "",
-        "Consulta:",
-        consulta
-      ];
-      const body = encodeURIComponent(bodyLines.join("\n"));
-      const mailto = `mailto:maclar@sion.com?subject=${subject}&body=${body}`;
-
-      status.className = "form-status form-status--ok";
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      status.className = "form-status";
       status.setAttribute("data-show", "true");
-      status.textContent =
-        "Este formulario no envía la consulta automáticamente. Se abrirá tu cliente de correo con los datos completados para que la envíes vos mismo a MACLAR.";
-      window.location.href = mailto;
+      status.textContent = "Enviando consulta…";
+
+      const payload = {
+        _subject: "Nueva consulta desde maclar.com.ar — " + nombre,
+        _template: "table",
+        _captcha: "false",
+        Nombre: nombre,
+        Empresa: (data.get("empresa") || "-").toString().trim() || "-",
+        Correo: correo,
+        "Teléfono": (data.get("telefono") || "-").toString().trim() || "-",
+        "Producto de interés": select ? select.options[select.selectedIndex].text : "-",
+        Consulta: consulta
+      };
+
+      const reqTimeout = new AbortController();
+      const reqTimeoutId = setTimeout(() => reqTimeout.abort(), 10000);
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+        signal: reqTimeout.signal
+      })
+        .then((res) => (res.ok ? res.json() : Promise.reject(new Error("HTTP " + res.status))))
+        .then(() => {
+          status.className = "form-status form-status--ok";
+          status.textContent = "¡Listo! Tu consulta fue enviada. Te vamos a contactar a la brevedad.";
+          form.reset();
+        })
+        .catch(() => {
+          status.className = "form-status form-status--err";
+          status.textContent =
+            "No pudimos enviar la consulta automáticamente. Escribinos directamente a maclar@sion.com o volvé a intentarlo en unos minutos.";
+        })
+        .finally(() => {
+          clearTimeout(reqTimeoutId);
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 
