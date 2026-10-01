@@ -622,6 +622,115 @@
     }
   }
 
+  /* ---------------- Repuestos ---------------- */
+  const REPUESTO_ICON = `<svg class="repuesto-card__icon" width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M14.7 6.3a1 1 0 0 0-1.4 0l-1.3 1.3-1-1a3 3 0 0 0-4.2 0L4.6 8.8a3 3 0 0 0 0 4.2l1 1-1.3 1.3a1 1 0 1 0 1.4 1.4l1.3-1.3 1 1a3 3 0 0 0 4.2 0l2.2-2.2a3 3 0 0 0 0-4.2l-1-1 1.3-1.3a1 1 0 0 0 0-1.4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+  </svg>`;
+
+  function initRepuestos() {
+    const grid = document.querySelector("[data-repuestos-grid]");
+    if (!grid || typeof MACLAR_REPUESTOS === "undefined") return;
+
+    const searchInput = document.querySelector("[data-repuestos-search]");
+    const filtersWrap = document.querySelector("[data-repuestos-filters]");
+    const countEl = document.querySelector("[data-repuestos-count]");
+    const emptyEl = document.querySelector("[data-repuestos-empty]");
+    const syncNote = document.querySelector("[data-repuestos-sync-note]");
+
+    let items = MACLAR_REPUESTOS;
+    let activeCat = "todos";
+    let query = "";
+
+    MACLAR_REPUESTOS_CATEGORIES.forEach((cat) => {
+      const chip = document.createElement("button");
+      chip.className = "filter-chip";
+      chip.type = "button";
+      chip.setAttribute("data-filter-chip", cat.slug);
+      chip.setAttribute("aria-pressed", "false");
+      chip.textContent = cat.name;
+      filtersWrap.appendChild(chip);
+    });
+
+    function render() {
+      const q = query.trim().toLowerCase();
+      const filtered = items.filter((it) => {
+        if (activeCat !== "todos" && it.cat !== activeCat) return false;
+        if (q && !it.name.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      grid.innerHTML = "";
+      filtered.forEach((it) => {
+        const card = document.createElement("article");
+        card.className = "repuesto-card";
+        const imgPath = maclarRepuestoImagePath(it);
+        card.innerHTML = `
+          <div class="repuesto-card__media">${imgPath ? `<img src="${imgPath}" alt="${it.name}" loading="lazy" decoding="async">` : REPUESTO_ICON}</div>
+          <span class="repuesto-card__cat">${it.catLabel}</span>
+          <h3 class="repuesto-card__name">${it.name}</h3>
+          <span class="repuesto-card__price">${maclarFormatUsd(it.price)}</span>`;
+        grid.appendChild(card);
+      });
+
+      if (countEl) countEl.textContent = `${filtered.length} de ${items.length} repuestos`;
+      if (emptyEl) emptyEl.hidden = filtered.length !== 0;
+    }
+
+    document.querySelectorAll("[data-repuestos-filters] [data-filter-chip]").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll("[data-repuestos-filters] [data-filter-chip]").forEach((c) => c.setAttribute("aria-pressed", "false"));
+        chip.setAttribute("aria-pressed", "true");
+        activeCat = chip.getAttribute("data-filter-chip");
+        render();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        query = searchInput.value;
+        render();
+      });
+    }
+
+    render();
+
+    // Sincronización de precios: si MACLAR_REPUESTOS_CSV_URL está configurada
+    // (ver js/repuestos.js), se intenta traer precios actualizados desde una
+    // planilla de Google Sheets publicada como CSV. Si falla por cualquier
+    // motivo (sin conexión, link no configurado, CORS) se deja la planilla
+    // importada como está, sin romper nada.
+    if (typeof MACLAR_REPUESTOS_CSV_URL === "string" && MACLAR_REPUESTOS_CSV_URL.trim()) {
+      fetch(MACLAR_REPUESTOS_CSV_URL)
+        .then((res) => (res.ok ? res.text() : Promise.reject(new Error("HTTP " + res.status))))
+        .then((csvText) => {
+          const rows = csvText.trim().split("\n").map((line) => line.split(",").map((c) => c.replace(/^"|"$/g, "").trim()));
+          const header = rows.shift().map((h) => h.toLowerCase());
+          const nameIdx = header.findIndex((h) => h.includes("nombre") || h.includes("name"));
+          const priceIdx = header.findIndex((h) => h.includes("precio") || h.includes("price"));
+          if (nameIdx === -1 || priceIdx === -1) return;
+
+          const byName = new Map(items.map((it) => [it.name.toLowerCase(), it]));
+          let updated = 0;
+          rows.forEach((cols) => {
+            const name = (cols[nameIdx] || "").toLowerCase();
+            const price = parseFloat((cols[priceIdx] || "").replace(",", "."));
+            const match = byName.get(name);
+            if (match && !isNaN(price) && match.price !== price) {
+              match.price = price;
+              updated++;
+            }
+          });
+          if (updated > 0 && syncNote) {
+            syncNote.textContent = `Precios actualizados desde la planilla (${updated} cambios) — ${new Date().toLocaleString("es-AR")}.`;
+          }
+          render();
+        })
+        .catch(() => {
+          /* Sin sync disponible: se mantienen los precios importados. */
+        });
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initHero();
     initCatalog();
@@ -630,5 +739,6 @@
     initAnatomy();
     initAnatomySwitcher();
     initProductPage();
+    initRepuestos();
   });
 })();

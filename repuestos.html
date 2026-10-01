@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repuestos — MACLAR</title>
+<meta name="description" content="Listado de repuestos MACLAR con precios de referencia en dólares: botoneras, resistencias, transformadores y electrónica general.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2310161d%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%230072ad%22 font-family=%22sans-serif%22 font-weight=%22800%22>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo:wght@600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<noscript><style>[data-reveal], [data-reveal] * { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltear al contenido</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html">
+      <img class="brand__logo" src="assets/logo/maclar-logo.svg" alt="MACLAR — Industrias Electromecánicas" width="337" height="80">
+    </a>
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="index.html#catalogo">Productos</a>
+      <a href="repuestos.html" aria-current="page">Repuestos</a>
+      <a href="index.html#empresa">Empresa</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary" href="index.html#contacto">Solicitar cotización</a>
+      <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+        <span></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="mobile-nav" data-mobile-nav aria-label="Navegación móvil">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#catalogo">Productos</a>
+    <a href="repuestos.html">Repuestos</a>
+    <a href="index.html#empresa">Empresa</a>
+    <a href="index.html#contacto">Contacto</a>
+    <a class="btn btn-primary" href="index.html#contacto">Solicitar cotización</a>
+  </nav>
+</header>
+
+<main id="contenido">
+  <p class="breadcrumbs container"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><span>Repuestos</span></p>
+
+  <section class="section" style="padding-top:20px;">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Repuestos</p>
+        <h1>Listado de repuestos</h1>
+        <p class="lede">Repuestos y componentes para mantenimiento de sistemas de maniobra MACLAR. Precios de referencia en dólares estadounidenses (U$S), sujetos a confirmación al momento de la consulta.</p>
+        <p class="specs-note" data-repuestos-sync-note style="margin-top:10px;"></p>
+      </div>
+
+      <div class="repuestos-toolbar" data-reveal>
+        <div class="field repuestos-search">
+          <input type="search" placeholder="Buscar repuesto por nombre…" aria-label="Buscar repuesto" data-repuestos-search>
+        </div>
+        <div class="filters" role="group" aria-label="Filtrar repuestos por categoría" data-repuestos-filters>
+          <button class="filter-chip" data-filter-chip="todos" aria-pressed="true">Todos</button>
+        </div>
+      </div>
+
+      <p class="repuestos-count" data-repuestos-count></p>
+      <div class="repuestos-grid" data-repuestos-grid data-reveal></div>
+      <p class="repuestos-empty" data-repuestos-empty hidden>No encontramos repuestos que coincidan con la búsqueda.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:14px; display:inline-flex;">
+          <img class="brand__logo" src="assets/logo/maclar-logo-white.svg" alt="MACLAR — Industrias Electromecánicas" width="337" height="80">
+        </a>
+        <p style="max-width:34ch; font-size:.88rem; color:rgba(255,255,255,.55);">Fabricación de sistemas de comando y señalización para ascensores y montacargas desde 1975.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="index.html#catalogo">Productos</a></li>
+          <li><a href="repuestos.html">Repuestos</a></li>
+          <li><a href="index.html#empresa">Empresa</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li>Santa Elena 337, Barracas, CABA</li>
+          <li>(011) 4303-2389</li>
+          <li>maclar@sion.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Industrias Electromecánicas MACLAR S.R.L.</span>
+      <span>Sitio de referencia no oficial, elaborado a partir de información pública.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/repuestos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
