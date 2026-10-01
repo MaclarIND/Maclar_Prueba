@@ -14,7 +14,7 @@
 // Link de Google Sheets publicada como CSV (Archivo → Compartir → Publicar
 // en la web → CSV) con columnas "nombre" y "precio". Mientras esté vacío,
 // la página usa únicamente los precios importados más abajo.
-const MACLAR_REPUESTOS_CSV_URL = "";
+const MACLAR_REPUESTOS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKZeNT5yGywQqq0_f533617UIW-a6choxAyYbh3CyyNGzOoUT7sXvWKD4lef_EqtZyuj-ARLNeO3t/pub?output=csv";
 
 const MACLAR_REPUESTOS_CATEGORIES = [
   {
