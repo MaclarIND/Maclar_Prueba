@@ -700,7 +700,9 @@
     // motivo (sin conexión, link no configurado, CORS) se deja la planilla
     // importada como está, sin romper nada.
     if (typeof MACLAR_REPUESTOS_CSV_URL === "string" && MACLAR_REPUESTOS_CSV_URL.trim()) {
-      fetch(MACLAR_REPUESTOS_CSV_URL)
+      const csvTimeout = new AbortController();
+      const csvTimeoutId = setTimeout(() => csvTimeout.abort(), 6000);
+      fetch(MACLAR_REPUESTOS_CSV_URL, { signal: csvTimeout.signal })
         .then((res) => (res.ok ? res.text() : Promise.reject(new Error("HTTP " + res.status))))
         .then((csvText) => {
           const rows = csvText.trim().split("\n").map((line) => line.split(",").map((c) => c.replace(/^"|"$/g, "").trim()));
@@ -726,8 +728,9 @@
           render();
         })
         .catch(() => {
-          /* Sin sync disponible: se mantienen los precios importados. */
-        });
+          /* Sin sync disponible (timeout, sin conexión, etc.): se mantienen los precios importados. */
+        })
+        .finally(() => clearTimeout(csvTimeoutId));
     }
   }
 
