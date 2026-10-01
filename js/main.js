@@ -39,11 +39,23 @@
   });
 
   /* ---------------- Reveal on scroll ---------------- */
-  const revealEls = document.querySelectorAll("[data-reveal]");
-  if (revealEls.length) {
+  // Se llama al final de DOMContentLoaded (ver abajo), después de que todas
+  // las grillas dinámicas (catálogo, repuestos, relacionados) ya tienen sus
+  // tarjetas reales. Si se observa un contenedor todavía vacío, su altura es
+  // 0 y el IntersectionObserver nunca lo marca como intersectando — quedaba
+  // en opacity:0 para siempre hasta que algún mutation/reflow posterior
+  // (por ej. tocar un filtro) forzaba un recálculo.
+  function initReveal() {
+    const revealEls = document.querySelectorAll("[data-reveal]");
+    if (!revealEls.length) return;
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
       revealEls.forEach((el) => el.setAttribute("data-revealed", "true"));
     } else {
+      // threshold bajo (no 0.12 de área) a propósito: un contenedor muy alto
+      // (p. ej. la grilla de 127 repuestos) casi nunca llega a cubrir el 12%
+      // de SU PROPIA área total con el viewport, así que ese umbral no se
+      // cumplía nunca en la carga inicial — recién disparaba cuando un
+      // filtro reducía la cantidad de tarjetas y por lo tanto la altura.
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -53,7 +65,7 @@
             }
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        { threshold: 0, rootMargin: "0px 0px -40px 0px" }
       );
       revealEls.forEach((el) => io.observe(el));
     }
@@ -706,29 +718,46 @@
         .then((res) => (res.ok ? res.text() : Promise.reject(new Error("HTTP " + res.status))))
         .then((csvText) => {
           const rows = csvText.trim().split("\n").map((line) => line.split(",").map((c) => c.replace(/^"|"$/g, "").trim()));
-          const header = rows.shift().map((h) => h.toLowerCase());
+          const header = (rows.shift() || []).map((h) => h.toLowerCase());
           const nameIdx = header.findIndex((h) => h.includes("nombre") || h.includes("name"));
           const priceIdx = header.findIndex((h) => h.includes("precio") || h.includes("price"));
-          if (nameIdx === -1 || priceIdx === -1) return;
+          if (nameIdx === -1 || priceIdx === -1) {
+            if (syncNote) {
+              syncNote.textContent = `No reconocí las columnas de la planilla (encabezados leídos: "${header.join('", "')}"). Deben incluir "nombre" y "precio".`;
+            }
+            return;
+          }
 
           const byName = new Map(items.map((it) => [it.name.toLowerCase(), it]));
           let updated = 0;
+          let matched = 0;
           rows.forEach((cols) => {
             const name = (cols[nameIdx] || "").toLowerCase();
             const price = parseFloat((cols[priceIdx] || "").replace(",", "."));
             const match = byName.get(name);
-            if (match && !isNaN(price) && match.price !== price) {
-              match.price = price;
-              updated++;
+            if (match && !isNaN(price)) {
+              matched++;
+              if (match.price !== price) {
+                match.price = price;
+                updated++;
+              }
             }
           });
-          if (updated > 0 && syncNote) {
-            syncNote.textContent = `Precios actualizados desde la planilla (${updated} cambios) — ${new Date().toLocaleString("es-AR")}.`;
+          if (syncNote) {
+            if (matched === 0) {
+              syncNote.textContent = `Leí la planilla (${rows.length} filas) pero ningún nombre coincidió con el catálogo. Revisá que el nombre en la planilla sea igual al del sitio.`;
+            } else {
+              syncNote.textContent = `Planilla sincronizada: ${matched} repuestos encontrados, ${updated} con precio distinto al importado — ${new Date().toLocaleString("es-AR")}.`;
+            }
           }
           render();
         })
-        .catch(() => {
-          /* Sin sync disponible (timeout, sin conexión, etc.): se mantienen los precios importados. */
+        .catch((err) => {
+          if (syncNote) {
+            syncNote.textContent = err && err.name === "AbortError"
+              ? "La planilla tardó demasiado en responder; se muestran los precios importados."
+              : "No se pudo conectar con la planilla publicada; se muestran los precios importados.";
+          }
         })
         .finally(() => clearTimeout(csvTimeoutId));
     }
@@ -743,5 +772,6 @@
     initAnatomySwitcher();
     initProductPage();
     initRepuestos();
+    initReveal();
   });
 })();
