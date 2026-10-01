@@ -714,7 +714,11 @@
     if (typeof MACLAR_REPUESTOS_CSV_URL === "string" && MACLAR_REPUESTOS_CSV_URL.trim()) {
       const csvTimeout = new AbortController();
       const csvTimeoutId = setTimeout(() => csvTimeout.abort(), 6000);
-      fetch(MACLAR_REPUESTOS_CSV_URL, { signal: csvTimeout.signal })
+      // Google cachea agresivamente el CSV publicado; se agrega un parámetro
+      // único por carga y se pide al navegador no usar su propia caché, para
+      // no mostrar precios viejos aunque la planilla ya se haya actualizado.
+      const csvUrl = MACLAR_REPUESTOS_CSV_URL + (MACLAR_REPUESTOS_CSV_URL.includes("?") ? "&" : "?") + "_=" + Date.now();
+      fetch(csvUrl, { signal: csvTimeout.signal, cache: "no-store" })
         .then((res) => (res.ok ? res.text() : Promise.reject(new Error("HTTP " + res.status))))
         .then((csvText) => {
           const rows = csvText.trim().split("\n").map((line) => line.split(",").map((c) => c.replace(/^"|"$/g, "").trim()));

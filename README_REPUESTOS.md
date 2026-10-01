@@ -34,6 +34,28 @@ está cargado en el sitio (no hace falta que sea idéntico en mayúsculas,
 pero sí en el texto). Si cambiás el nombre de un repuesto en la planilla,
 avisame para actualizarlo también en `js/repuestos.js`.
 
+### "Cambié un precio y no se actualiza en la página"
+
+Causa más común: Google Sheets, por defecto, **no** vuelve a publicar el CSV
+solo porque edites una celda — hay que tildar una casilla para que lo haga
+automáticamente. Revisá esto:
+
+1. En Sheets: **Archivo → Compartir → Publicar en la web**.
+2. Abajo del todo del cuadro de publicación hay una opción **"Republicar
+   automáticamente cuando se realicen cambios"**. Tiene que estar tildada.
+   Si no lo está, cada edición de precio queda guardada en la hoja pero el
+   link CSV sigue sirviendo la versión vieja hasta que vuelvas a apretar
+   "Publicar" a mano.
+3. Confirmá que estás editando la **misma hoja/pestaña** que elegiste al
+   publicar (si el archivo tiene varias pestañas, publicar una no actualiza
+   el CSV de otra).
+
+Si ya revisaste eso y sigue sin reflejarse: entrá a `repuestos.html` y fijate
+el texto chico debajo del título — el sitio muestra ahí un diagnóstico
+automático (si no pudo conectarse, si conectó pero ningún nombre coincidió,
+o si sincronizó bien y cuántos repuestos encontró). Pasame ese texto tal
+cual aparece y lo reviso puntualmente.
+
 ## Imágenes
 
 Los repuestos todavía no tienen fotos propias — se muestra un ícono
