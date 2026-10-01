@@ -403,7 +403,7 @@
         .catch(() => {
           status.className = "form-status form-status--err";
           status.textContent =
-            "No pudimos enviar la consulta automáticamente. Escribinos directamente a maclar@sion.com o volvé a intentarlo en unos minutos.";
+            "No pudimos enviar la consulta automáticamente. Escribinos directamente a Maclarsrl@gmail.com o volvé a intentarlo en unos minutos.";
         })
         .finally(() => {
           clearTimeout(reqTimeoutId);
