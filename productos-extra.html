@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Repuestos — MACLAR</title>
-<meta name="description" content="Listado de repuestos MACLAR con precios de referencia en dólares: botoneras, resistencias, transformadores y electrónica general.">
+<title>Controles y Accesorios — MACLAR</title>
+<meta name="description" content="Catálogo técnico MACLAR: placas y accesorios, controles electrónicos, botoneras, contactoras LG y controles electromecánicos.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2310161d%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%230072ad%22 font-family=%22sans-serif%22 font-weight=%22800%22>M</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@
     <nav class="nav-desktop" aria-label="Navegación principal">
       <a href="index.html">Inicio</a>
       <a href="index.html#catalogo">Productos</a>
-      <a href="repuestos.html" aria-current="page">Repuestos</a>
-      <a href="productos-extra.html">Controles y Accesorios</a>
+      <a href="repuestos.html">Repuestos</a>
+      <a href="productos-extra.html" aria-current="page">Controles y Accesorios</a>
       <a href="index.html#empresa">Empresa</a>
       <a href="index.html#contacto">Contacto</a>
     </nav>
@@ -47,29 +47,28 @@
 </header>
 
 <main id="contenido">
-  <p class="breadcrumbs container"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><span>Repuestos</span></p>
+  <p class="breadcrumbs container"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><span>Controles y Accesorios</span></p>
 
   <section class="section" style="padding-top:20px;">
     <div class="container">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Repuestos</p>
-        <h1>Listado de repuestos</h1>
-        <p class="lede">Repuestos y componentes para mantenimiento de sistemas de maniobra MACLAR. Precios de referencia en dólares estadounidenses (U$S), sujetos a confirmación al momento de la consulta.</p>
-        <p class="specs-note" data-repuestos-sync-note style="margin-top:10px;"></p>
+        <p class="eyebrow">Catálogo técnico</p>
+        <h1>Controles y accesorios</h1>
+        <p class="lede">Placas y accesorios, controles electrónicos y electromecánicos, botoneras y contactoras LG. Catálogo de referencia por nombre de producto; precios e imágenes se incorporan próximamente.</p>
       </div>
 
       <div class="repuestos-toolbar" data-reveal>
         <div class="field repuestos-search">
-          <input type="search" placeholder="Buscar repuesto por nombre…" aria-label="Buscar repuesto" data-repuestos-search>
+          <input type="search" placeholder="Buscar producto por nombre…" aria-label="Buscar producto" data-extra-search>
         </div>
-        <div class="filters" role="group" aria-label="Filtrar repuestos por categoría" data-repuestos-filters>
+        <div class="filters" role="group" aria-label="Filtrar por categoría" data-extra-filters>
           <button class="filter-chip" data-filter-chip="todos" aria-pressed="true">Todos</button>
         </div>
       </div>
 
-      <p class="repuestos-count" data-repuestos-count></p>
-      <div class="repuestos-grid" data-repuestos-grid data-reveal></div>
-      <p class="repuestos-empty" data-repuestos-empty hidden>No encontramos repuestos que coincidan con la búsqueda.</p>
+      <p class="repuestos-count" data-extra-count></p>
+      <div class="repuestos-grid" data-extra-grid data-reveal></div>
+      <p class="repuestos-empty" data-extra-empty hidden>No encontramos productos que coincidan con la búsqueda.</p>
     </div>
   </section>
 </main>
@@ -110,7 +109,7 @@
 </footer>
 
 <script src="js/products.js"></script>
-<script src="js/repuestos.js"></script>
+<script src="js/productos-extra.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

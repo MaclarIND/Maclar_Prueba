@@ -763,6 +763,74 @@
     }
   }
 
+  /* ---------------- Productos extra (controles y accesorios) ---------------- */
+  function initProductosExtra() {
+    const grid = document.querySelector("[data-extra-grid]");
+    if (!grid || typeof MACLAR_PRODUCTOS_EXTRA === "undefined") return;
+
+    const searchInput = document.querySelector("[data-extra-search]");
+    const filtersWrap = document.querySelector("[data-extra-filters]");
+    const countEl = document.querySelector("[data-extra-count]");
+    const emptyEl = document.querySelector("[data-extra-empty]");
+
+    const items = MACLAR_PRODUCTOS_EXTRA;
+    let activeCat = "todos";
+    let query = "";
+
+    MACLAR_EXTRA_CATEGORIES.forEach((cat) => {
+      const chip = document.createElement("button");
+      chip.className = "filter-chip";
+      chip.type = "button";
+      chip.setAttribute("data-filter-chip", cat.id);
+      chip.setAttribute("aria-pressed", "false");
+      chip.textContent = cat.label;
+      filtersWrap.appendChild(chip);
+    });
+
+    function render() {
+      const q = query.trim().toLowerCase();
+      const filtered = items.filter((it) => {
+        if (activeCat !== "todos" && it.cat !== activeCat) return false;
+        if (q && !it.name.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      grid.innerHTML = "";
+      filtered.forEach((it) => {
+        const card = document.createElement("article");
+        card.className = "repuesto-card";
+        const imgPath = maclarExtraImagePath(it);
+        const catText = it.group ? `${it.catLabel} · ${it.group}` : it.catLabel;
+        card.innerHTML = `
+          <div class="repuesto-card__media">${imgPath ? `<img src="${imgPath}" alt="${it.name}" loading="lazy" decoding="async">` : REPUESTO_ICON}</div>
+          <span class="repuesto-card__cat">${catText}</span>
+          <h3 class="repuesto-card__name">${it.name}</h3>`;
+        grid.appendChild(card);
+      });
+
+      if (countEl) countEl.textContent = `${filtered.length} de ${items.length} productos`;
+      if (emptyEl) emptyEl.hidden = filtered.length !== 0;
+    }
+
+    document.querySelectorAll("[data-extra-filters] [data-filter-chip]").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll("[data-extra-filters] [data-filter-chip]").forEach((c) => c.setAttribute("aria-pressed", "false"));
+        chip.setAttribute("aria-pressed", "true");
+        activeCat = chip.getAttribute("data-filter-chip");
+        render();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        query = searchInput.value;
+        render();
+      });
+    }
+
+    render();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initHero();
     initCatalog();
@@ -772,6 +840,7 @@
     initAnatomySwitcher();
     initProductPage();
     initRepuestos();
+    initProductosExtra();
     initReveal();
   });
 })();
