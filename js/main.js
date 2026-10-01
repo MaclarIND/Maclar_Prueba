@@ -722,14 +722,19 @@
         .then((res) => (res.ok ? res.text() : Promise.reject(new Error("HTTP " + res.status))))
         .then((csvText) => {
           const rows = csvText.trim().split("\n").map((line) => line.split(",").map((c) => c.replace(/^"|"$/g, "").trim()));
-          const header = (rows.shift() || []).map((h) => h.toLowerCase());
-          const nameIdx = header.findIndex((h) => h.includes("nombre") || h.includes("name"));
-          const priceIdx = header.findIndex((h) => h.includes("precio") || h.includes("price"));
-          if (nameIdx === -1 || priceIdx === -1) {
-            if (syncNote) {
-              syncNote.textContent = `No reconocí las columnas de la planilla (encabezados leídos: "${header.join('", "')}"). Deben incluir "nombre" y "precio".`;
-            }
-            return;
+          const headerRow = (rows[0] || []).map((h) => h.toLowerCase());
+          let nameIdx = headerRow.findIndex((h) => h.includes("nombre") || h.includes("name"));
+          let priceIdx = headerRow.findIndex((h) => h.includes("precio") || h.includes("price"));
+          if (nameIdx !== -1 && priceIdx !== -1) {
+            // encabezados reconocidos: se descarta esa fila, el resto son datos
+            rows.shift();
+          } else {
+            // sin encabezados con esas palabras (p. ej. la planilla arranca
+            // directo con datos, o la primera fila es un título de categoría):
+            // se asume la columna A = nombre y la última columna = precio,
+            // que es como está armada la planilla de repuestos.
+            nameIdx = 0;
+            priceIdx = (rows[0] || []).length - 1;
           }
 
           const byName = new Map(items.map((it) => [it.name.toLowerCase(), it]));
