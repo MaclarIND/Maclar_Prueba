@@ -1,0 +1,25 @@
+name: Build bots (.exe Windows)
+on:
+  workflow_dispatch:
+  push:
+    paths: ["bots_fc/**"]
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: bots_fc
+        shell: cmd
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: build.bat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bots-windows
+          path: |
+            bots_fc/dist/*.exe
+            bots_fc/dist/config.json
+            bots_fc/README.md

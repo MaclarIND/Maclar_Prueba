@@ -1,0 +1,15 @@
+{
+  "excel_entrada": "jugadores.xlsx",
+  "max_sets": 12,
+  "bot1_headless": false,
+  "margen_max": 0.20,
+  "precio_max_absoluto": 5000,
+  "presupuesto_total": 30000,
+  "espera_min_seg": 3,
+  "espera_max_seg": 7,
+  "max_busquedas_sesion": 150,
+  "pausa_larga_cada": 25,
+  "pausa_larga_seg": 60,
+  "delay_tecla_ms": 90,
+  "modo_prueba": true
+}
